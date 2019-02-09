@@ -30,7 +30,7 @@ def _quick_sort(list_to_sort, start_index, end_index):
 
 
 def _partition(list_to_sort, start_index, end_index, pivot_index):
-    if start_index == end_index - 1:  # Only two items to be sorted
+    if start_index == end_index - 1:  # Edge case; only two items to sort
         if list_to_sort[start_index] > list_to_sort[end_index]:
             _swap(list_to_sort, start_index, end_index)
         return start_index
@@ -67,8 +67,8 @@ def _find_median_of_three(list_, start_index, end_index):
         list_[end_index]: end_index
     }
 
-    # You could do a series of if statements to find the median, but just
-    # easier to use this library function.
+    # You could do a series of if statements to find the median, but it's just
+    # easier to use the library function.
     median_of_three = statistics.median([
         list_[start_index],
         list_[middle_index],
