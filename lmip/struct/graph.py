@@ -5,7 +5,7 @@ import queue
 SearchResult = collections.namedtuple('SearchResult', ['target', 'path'])
 
 
-class GraphNode:
+class Vertex:
 
     def __init__(self, value):
         self._value = value
@@ -19,7 +19,7 @@ class GraphNode:
     def value(self):
         return self._value
 
-    def make_branch(self, other_node):
+    def make_edge(self, other_node):
         self.branches.append(other_node)
         other_node.branches.append(self)
 
