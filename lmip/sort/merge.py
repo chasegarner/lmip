@@ -11,30 +11,36 @@ def _merge_sort(list_to_sort, first_index, last_index):
 
     middle_index = first_index + ((last_index - first_index) // 2)
 
-    left_side = _merge_sort(list_to_sort, first_index, middle_index)
-    right_side = _merge_sort(list_to_sort, middle_index + 1, last_index)
+    left_list = _merge_sort(list_to_sort, first_index, middle_index)
+    right_list = _merge_sort(list_to_sort, middle_index + 1, last_index)
 
-    return _sort(left_side, right_side)
+    return _sort(left_list, right_list)
 
 
-def _sort(left_side, right_side):
-    left_side_pointer = 0
-    right_side_pointer = 0
+def _sort(left_list, right_list):
+    def has_unsorted_items():
+        return not (
+            left_list_pointer == len(left_list) and
+            right_list_pointer == len(right_list)
+        )
 
-    new_list = []
+    left_list_pointer = 0
+    right_list_pointer = 0
 
-    while not (left_side_pointer == len(left_side) and right_side_pointer == len(right_side)):
-        if left_side_pointer == len(left_side):
-            new_list.append(right_side[right_side_pointer])
-            right_side_pointer += 1
-        elif right_side_pointer == len(right_side):
-            new_list.append(left_side[left_side_pointer])
-            left_side_pointer += 1
-        elif left_side[left_side_pointer] <= right_side[right_side_pointer]:
-            new_list.append(left_side[left_side_pointer])
-            left_side_pointer += 1
+    sorted_list = []
+
+    while has_unsorted_items():
+        if left_list_pointer == len(left_list):
+            sorted_list.append(right_list[right_list_pointer])
+            right_list_pointer += 1
+        elif right_list_pointer == len(right_list):
+            sorted_list.append(left_list[left_list_pointer])
+            left_list_pointer += 1
+        elif left_list[left_list_pointer] <= right_list[right_list_pointer]:
+            sorted_list.append(left_list[left_list_pointer])
+            left_list_pointer += 1
         else:
-            new_list.append(right_side[right_side_pointer])
-            right_side_pointer += 1
+            sorted_list.append(right_list[right_list_pointer])
+            right_list_pointer += 1
 
-    return new_list
+    return sorted_list

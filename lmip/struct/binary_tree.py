@@ -1,30 +1,26 @@
 class BinaryTree:
 
     def __init__(self):
-        self._root = _BinaryTreeNode(None)
+        self._root = None
 
     def is_empty(self):
-        return self._root.value is None
+        return self._root is None
 
     def insert(self, insert_value):
-        if self._root.value is None:
-            self._root.value = insert_value
+        if self._root is None:
+            self._root = _BinaryTreeNode(insert_value)
         else:
             self._root.insert(insert_value)
 
-    def delete(self, delete_value):
-        if self._root.value is None:
-            raise NotFound
-        else:
-            self._root.delete(delete_value)
-
     def search(self, search_value):
-        if self._root.value is None:
+        if self._root is None:
             return None
         else:
-            return self._root.search
+            return self._root.search(search_value)
 
     def to_list(self):
+        if self._root is None:
+            return []
         return self._root.to_list()
 
 
@@ -38,6 +34,9 @@ class _BinaryTreeNode:
     def has_two_children(self):
         return self.left is not None and self.right is not None
 
+    def has_no_children(self):
+        return self.left is None and self.right is None
+
     def insert(self, insert_value):
         if insert_value <= self.value:
             if self.left is None:
@@ -49,20 +48,6 @@ class _BinaryTreeNode:
                 self.right = _BinaryTreeNode(insert_value)
             else:
                 self.right.insert(insert_value)
-
-    def delete(self, delete_value, parent=None):
-        if self.value == delete_value:
-            if self.has_two_children():
-                pass
-            elif self.has_one_child():
-                pass
-            else:
-                pass
-        else:
-            if delete_value <= self.value:
-                return self.left.delete(delete_value, parent=self) if self.left is not None else NotFound
-            else:
-                return self.right.delete(delete_value, parent=self) if self.right is not None else NotFound
 
     def search(self, search_value):
         if search_value == self.value:

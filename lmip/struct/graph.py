@@ -9,8 +9,7 @@ class Vertex:
 
     def __init__(self, value):
         self._value = value
-        self.branches = []  # = set() ; You could use a set here, but
-                            # a deterministic order is useful for testing
+        self.branches = []
 
     def __repr__(self):
         return str(self.value)
